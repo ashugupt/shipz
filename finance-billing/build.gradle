@@ -1,0 +1,14 @@
+configurations {
+  compile.extendsFrom springBootWeb
+  compile.extendsFrom jdbi
+  compile.extendsFrom jdbiPostgres
+  compile.extendsFrom postgresql
+  compile.extendsFrom hikari
+  compile.extendsFrom hibernateValidator
+  compile.extendsFrom flyway
+
+  testCompile.extendsFrom springBootTest
+  testCompile.extendsFrom junit
+  testCompile.extendsFrom h2
+  testCompile.extendsFrom flywayTestExtensions
+}

@@ -1,2 +1,6 @@
 rootProject.name = 'shipz-webapp'
 
+include 'auth'
+include 'finance-cms'
+include 'finance-billing'
+include 'finance-invoice'

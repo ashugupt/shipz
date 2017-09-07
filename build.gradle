@@ -1,14 +1,63 @@
-group 'co.shipz'
-version '0.0.1-SNAPSHOT'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
 
-apply plugin: 'java'
+buildscript {
+  ext {
+    springBootV = '2.0.0.M3'
+  }
 
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
+  repositories {
+    jcenter()
+    maven { url 'http://repo.spring.io/milestone' }
+  }
+  dependencies {
+    classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootV"
+  }
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+allprojects {
+  group 'co.shipz'
+}
+
+subprojects {
+  apply plugin: 'java'
+  apply plugin: 'org.springframework.boot'
+  apply plugin: 'io.spring.dependency-management'
+
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
+
+  configurations {
+    springBootWeb
+
+    jdbi
+    jdbiPostgres
+    postgresql
+    hikari
+    hibernateValidator
+    flyway
+
+    springBootTest
+    junit
+    h2
+    flywayTestExtension
+  }
+
+  dependencies {
+    springBootWeb "org.springframework.boot:spring-boot-starter-web:$springBootV"
+
+    jdbi "org.jdbi:jdbi3:$jdbiV"
+    jdbiPostgres "org.jdbi:jdbi3-postgres:$jdbiV"
+    postgresql "org.postgresql:postgresql:$postgresV"
+    hikari "com.zaxxer:HikariCP:$hikariV"
+    hibernateValidator "org.hibernate.validator:hibernate-validator:$hibernateValidatorV"
+    flyway "org.flywaydb:flyway-core:$flywayV"
+
+    //////////////// Testing dependencies //////////////////
+    springBootTest "org.springframework.boot:spring-boot-starter-test:$springBootV"
+    junit "junit:junit:$junitV"
+    h2 "com.h2database:h2:$h2V"
+    flywayTestExtension "org.flywaydb.flyway-test-extensions:flyway-spring-test:$flywayTestExtensionsV"
+
+  }
 }

@@ -13,6 +13,7 @@ configurations {
   compile.extendsFrom jdbiPostgres
   compile.extendsFrom postgresql
   compile.extendsFrom hikari
+  compile.extendsFrom validationApi
   compile.extendsFrom hibernateValidator
   compile.extendsFrom flyway
 

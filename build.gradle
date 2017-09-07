@@ -1,17 +1,19 @@
-apply plugin: 'idea'
-apply plugin: 'eclipse'
-
 buildscript {
   ext {
+    releasePluginV = '2.3.5'
     springBootV = '2.0.0.M3'
   }
 
   repositories {
+    mavenLocal()
+    mavenCentral()
     jcenter()
-    maven { url 'http://repo.spring.io/milestone' }
+
+    maven { url 'https://repo.spring.io/libs-milestone' }
   }
+
   dependencies {
-    classpath 'net.researchgate:gradle-release:2.3.5'
+    classpath "net.researchgate:gradle-release:$releasePluginV"
     classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootV"
   }
 }
@@ -20,23 +22,28 @@ allprojects {
   group 'co.shipz'
 
   apply plugin: 'java'
+  apply plugin: 'idea'
+  apply plugin: 'eclipse'
   apply plugin: 'net.researchgate.release'
   apply plugin: 'org.springframework.boot'
-  apply plugin: 'io.spring.dependency-management'
 
   repositories {
+    mavenLocal()
+    mavenCentral()
     jcenter()
+
+    maven { url 'https://repo.spring.io/libs-milestone' }
   }
 
   release {
     tagTemplate = '$name-$version'
   }
 
-  task(startmessage) {
+  task(startmessage) << {
     println 'starting build'
   }
 
-  task(printversion) {
+  task(printversion) << {
     println project.version
   }
 
@@ -64,6 +71,7 @@ subprojects {
     jdbiPostgres
     postgresql
     hikari
+    validationApi
     hibernateValidator
     flyway
 
@@ -78,7 +86,7 @@ subprojects {
     logback "ch.qos.logback:logback-classic:$logbackV"
 
     fj "org.functionaljava:functionaljava:$fjV"
-    fjCore "org.functionaljava:functionaljava-core:$fjV"
+    fjCore "org.functionaljava:functionaljava-java-core:$fjV"
     fjJava8 "org.functionaljava:functionaljava-java8:$fjV"
     fjQuickcheck "org.functionaljava:functionaljava-quickcheck:$fjV"
 
@@ -88,6 +96,7 @@ subprojects {
     jdbiPostgres "org.jdbi:jdbi3-postgres:$jdbiV"
     postgresql "org.postgresql:postgresql:$postgresV"
     hikari "com.zaxxer:HikariCP:$hikariV"
+    validationApi "javax.validation:validation-api:$validationApiV"
     hibernateValidator "org.hibernate.validator:hibernate-validator:$hibernateValidatorV"
     flyway "org.flywaydb:flyway-core:$flywayV"
 

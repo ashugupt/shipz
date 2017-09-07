@@ -21,6 +21,8 @@ allprojects {
 
   apply plugin: 'java'
   apply plugin: 'net.researchgate.release'
+  apply plugin: 'org.springframework.boot'
+  apply plugin: 'io.spring.dependency-management'
 
   repositories {
     jcenter()
@@ -43,9 +45,6 @@ allprojects {
 }
 
 subprojects {
-
-  apply plugin: 'org.springframework.boot'
-  apply plugin: 'io.spring.dependency-management'
 
   sourceCompatibility = 1.8
   targetCompatibility = 1.8

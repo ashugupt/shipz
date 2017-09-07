@@ -11,16 +11,39 @@ buildscript {
     maven { url 'http://repo.spring.io/milestone' }
   }
   dependencies {
+    classpath 'net.researchgate:gradle-release:2.3.5'
     classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootV"
   }
 }
 
 allprojects {
   group 'co.shipz'
+
+  apply plugin: 'java'
+  apply plugin: 'net.researchgate.release'
+
+  repositories {
+    jcenter()
+  }
+
+  release {
+    tagTemplate = '$name-$version'
+  }
+
+  task(startmessage) << {
+    println 'starting build'
+  }
+
+  task(printversion) << {
+    println project.version
+  }
+
+  beforeReleaseBuild.dependsOn startmessage
+  afterReleaseBuild.dependsOn printversion
 }
 
 subprojects {
-  apply plugin: 'java'
+
   apply plugin: 'org.springframework.boot'
   apply plugin: 'io.spring.dependency-management'
 
@@ -28,6 +51,14 @@ subprojects {
   targetCompatibility = 1.8
 
   configurations {
+    slf4j
+    logback
+
+    fj
+    fjCore
+    fjJava8
+    fjQuickcheck
+
     springBootWeb
 
     jdbi
@@ -44,6 +75,14 @@ subprojects {
   }
 
   dependencies {
+    slf4j "org.slf4j:slf4j-api:$slf4jV"
+    logback "ch.qos.logback:logback-classic:$logbackV"
+
+    fj "org.functionaljava:functionaljava:$fjV"
+    fjCore "org.functionaljava:functionaljava-core:$fjV"
+    fjJava8 "org.functionaljava:functionaljava-java8:$fjV"
+    fjQuickcheck "org.functionaljava:functionaljava-quickcheck:$fjV"
+
     springBootWeb "org.springframework.boot:spring-boot-starter-web:$springBootV"
 
     jdbi "org.jdbi:jdbi3:$jdbiV"
@@ -58,6 +97,5 @@ subprojects {
     junit "junit:junit:$junitV"
     h2 "com.h2database:h2:$h2V"
     flywayTestExtension "org.flywaydb.flyway-test-extensions:flyway-spring-test:$flywayTestExtensionsV"
-
   }
 }

@@ -1,5 +1,14 @@
 configurations {
+  compile.extendsFrom slf4j
+  compile.extendsFrom logback
+
+  compile.extendsFrom fj
+  compile.extendsFrom fjCore
+  compile.extendsFrom fjJava8
+  compile.extendsFrom fjQuickcheck
+
   compile.extendsFrom springBootWeb
+
   compile.extendsFrom jdbi
   compile.extendsFrom jdbiPostgres
   compile.extendsFrom postgresql

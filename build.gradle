@@ -24,8 +24,13 @@ allprojects {
   apply plugin: 'java'
   apply plugin: 'idea'
   apply plugin: 'eclipse'
+  apply plugin: 'maven-publish'
   apply plugin: 'net.researchgate.release'
   apply plugin: 'org.springframework.boot'
+
+  configurations {
+    deployerJars
+  }
 
   repositories {
     mavenLocal()
@@ -33,7 +38,28 @@ allprojects {
     jcenter()
 
     maven { url 'https://repo.spring.io/libs-milestone' }
+
+    maven {
+      url "http://localhost:8081/nexus"
+      credentials {
+        username "deployment"
+        password "deployment123"
+      }
+    }
   }
+
+  dependencies {
+    deployerJars "org.apache.maven.wagon:wagon-http:$deployerJarsV"
+  }
+
+  publishing {
+    publications {
+      mavenJava(MavenPublication) {
+        from components.java
+      }
+    }
+  }
+
 
   release {
     tagTemplate = '$name-$version'

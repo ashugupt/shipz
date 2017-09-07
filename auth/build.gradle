@@ -22,3 +22,9 @@ configurations {
   testCompile.extendsFrom h2
   testCompile.extendsFrom flywayTestExtensions
 }
+
+jar {
+  manifest {
+    attributes("Main-Class": "app.Application")
+  }
+}

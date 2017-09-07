@@ -24,9 +24,14 @@ allprojects {
   apply plugin: 'java'
   apply plugin: 'idea'
   apply plugin: 'eclipse'
-  apply plugin: 'maven-publish'
+//  apply plugin: 'maven-publish'
+  apply plugin: 'application'
   apply plugin: 'net.researchgate.release'
   apply plugin: 'org.springframework.boot'
+
+  ext {
+    artifactoryRepo = project.properties.containsKey("releaseVersion") ? "libs-release-local" : "libs-snapshot-local"
+  }
 
   configurations {
     deployerJars
@@ -39,25 +44,17 @@ allprojects {
 
     maven { url 'https://repo.spring.io/libs-milestone' }
 
-    maven {
-      url "http://localhost:8081/nexus"
-      credentials {
-        username "deployment"
-        password "deployment123"
-      }
-    }
+//    maven {
+//      url "http://localhost:8081/"
+//      credentials {
+//        username "deployment"
+//        password "deployment123"
+//      }
+//    }
   }
 
   dependencies {
     deployerJars "org.apache.maven.wagon:wagon-http:$deployerJarsV"
-  }
-
-  publishing {
-    publications {
-      mavenJava(MavenPublication) {
-        from components.java
-      }
-    }
   }
 
 

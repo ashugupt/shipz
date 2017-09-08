@@ -2,12 +2,16 @@ configurations {
   compile.extendsFrom slf4j
   compile.extendsFrom logback
 
+  compile.extendsFrom lombok
+
   compile.extendsFrom fj
   compile.extendsFrom fjCore
   compile.extendsFrom fjJava8
   compile.extendsFrom fjQuickcheck
 
   compile.extendsFrom springBootWeb
+  compile.extendsFrom springBootSecurity
+  compile.extendsFrom springBootJdbc
 
   compile.extendsFrom jdbi
   compile.extendsFrom jdbiPostgres
@@ -25,6 +29,6 @@ configurations {
 
 jar {
   manifest {
-    attributes("Main-Class": "app.Application")
+    attributes("Main-Class": "co.shipz.auth.app.Application")
   }
 }

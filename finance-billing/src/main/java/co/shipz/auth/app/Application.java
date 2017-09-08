@@ -1,4 +1,4 @@
-package app;
+package co.shipz.auth.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

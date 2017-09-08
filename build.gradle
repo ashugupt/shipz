@@ -24,13 +24,17 @@ allprojects {
   apply plugin: 'java'
   apply plugin: 'idea'
   apply plugin: 'eclipse'
-//  apply plugin: 'maven-publish'
   apply plugin: 'application'
   apply plugin: 'net.researchgate.release'
   apply plugin: 'org.springframework.boot'
 
   ext {
     artifactoryRepo = project.properties.containsKey("releaseVersion") ? "libs-release-local" : "libs-snapshot-local"
+  }
+
+  configurations {
+    all*.exclude group: "org.hibernate", module: "hibernate-entitymanager"
+    all*.exclude group: "org.apache.tomcat", module: "tomcat-jdbc"
   }
 
   configurations {
@@ -43,14 +47,6 @@ allprojects {
     jcenter()
 
     maven { url 'https://repo.spring.io/libs-milestone' }
-
-//    maven {
-//      url "http://localhost:8081/"
-//      credentials {
-//        username "deployment"
-//        password "deployment123"
-//      }
-//    }
   }
 
   dependencies {
@@ -83,12 +79,16 @@ subprojects {
     slf4j
     logback
 
+    lombok
+
     fj
     fjCore
     fjJava8
     fjQuickcheck
 
     springBootWeb
+    springBootJdbc
+    springBootSecurity
 
     jdbi
     jdbiPostgres
@@ -108,12 +108,18 @@ subprojects {
     slf4j "org.slf4j:slf4j-api:$slf4jV"
     logback "ch.qos.logback:logback-classic:$logbackV"
 
+    lombok "org.projectlombok:lombok:$lombokV"
+
     fj "org.functionaljava:functionaljava:$fjV"
     fjCore "org.functionaljava:functionaljava-java-core:$fjV"
     fjJava8 "org.functionaljava:functionaljava-java8:$fjV"
     fjQuickcheck "org.functionaljava:functionaljava-quickcheck:$fjV"
 
     springBootWeb "org.springframework.boot:spring-boot-starter-web:$springBootV"
+    springBootSecurity "org.springframework.boot:spring-boot-starter-security:$springBootV"
+    springBootJdbc ("org.springframework.boot:spring-boot-starter-jdbc:$springBootV") {
+      exclude group: "org.apache.tomcat", module: "tomcat-jdbc"
+    }
 
     jdbi "org.jdbi:jdbi3:$jdbiV"
     jdbiPostgres "org.jdbi:jdbi3-postgres:$jdbiV"

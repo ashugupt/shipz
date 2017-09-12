@@ -4,6 +4,8 @@ configurations {
 
   compile.extendsFrom lombok
 
+  compile.extendsFrom jacksonDatabind
+
   compile.extendsFrom fj
   compile.extendsFrom fjCore
   compile.extendsFrom fjJava8

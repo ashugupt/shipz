@@ -81,6 +81,8 @@ subprojects {
 
     lombok
 
+    jacksonDatabind
+
     fj
     fjCore
     fjJava8
@@ -109,6 +111,8 @@ subprojects {
     logback "ch.qos.logback:logback-classic:$logbackV"
 
     lombok "org.projectlombok:lombok:$lombokV"
+
+    jacksonDatabind "com.fasterxml.jackson.core:jackson-databind$jacksonV"
 
     fj "org.functionaljava:functionaljava:$fjV"
     fjCore "org.functionaljava:functionaljava-java-core:$fjV"

@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS "address" (
   city_id         INTEGER              NOT NULL,
   state_id        INTEGER              NOT NULL,
   line1           VARCHAR(32)          NOT NULL,
-  line2           VARCHAR(32)          NOT NULL,
+  line2           VARCHAR(32),
   line3           VARCHAR(32),
   landmark        VARCHAR(32),
   country         VARCHAR(32)          NOT NULL,

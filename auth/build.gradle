@@ -1,3 +1,5 @@
+version = '0.0.1-SNAPSHOT'
+
 configurations {
   compile.extendsFrom slf4j
   compile.extendsFrom logback
@@ -16,11 +18,16 @@ configurations {
   compile.extendsFrom springBootJdbc
 
   compile.extendsFrom jdbi
+  compile.extendsFrom jdbiSqlObject
   compile.extendsFrom jdbiPostgres
+
   compile.extendsFrom postgresql
   compile.extendsFrom hikari
+
   compile.extendsFrom validationApi
   compile.extendsFrom hibernateValidator
+  compile.extendsFrom modelMapper
+
   compile.extendsFrom flyway
 
   testCompile.extendsFrom springBootTest

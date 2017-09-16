@@ -1,7 +1,7 @@
 buildscript {
   ext {
     releasePluginV = '2.3.5'
-    springBootV = '2.0.0.M3'
+    springBootV = '2.0.0.M4'
   }
 
   repositories {
@@ -93,11 +93,16 @@ subprojects {
     springBootSecurity
 
     jdbi
+    jdbiSqlObject
     jdbiPostgres
+
     postgresql
     hikari
+
     validationApi
     hibernateValidator
+    modelMapper
+
     flyway
 
     springBootTest
@@ -112,8 +117,6 @@ subprojects {
 
     lombok "org.projectlombok:lombok:$lombokV"
 
-    jacksonDatabind "com.fasterxml.jackson.core:jackson-databind$jacksonV"
-
     fj "org.functionaljava:functionaljava:$fjV"
     fjCore "org.functionaljava:functionaljava-java-core:$fjV"
     fjJava8 "org.functionaljava:functionaljava-java8:$fjV"
@@ -125,12 +128,19 @@ subprojects {
       exclude group: "org.apache.tomcat", module: "tomcat-jdbc"
     }
 
+    jacksonDatabind "com.fasterxml.jackson.core:jackson-databind:$jacksonV"
+
     jdbi "org.jdbi:jdbi3:$jdbiV"
+    jdbiSqlObject "org.jdbi:jdbi3-sqlobject:$jdbiV"
     jdbiPostgres "org.jdbi:jdbi3-postgres:$jdbiV"
+
     postgresql "org.postgresql:postgresql:$postgresV"
     hikari "com.zaxxer:HikariCP:$hikariV"
+
     validationApi "javax.validation:validation-api:$validationApiV"
     hibernateValidator "org.hibernate.validator:hibernate-validator:$hibernateValidatorV"
+    modelMapper "org.modelmapper:modelmapper:$modelmapperV"
+
     flyway "org.flywaydb:flyway-core:$flywayV"
 
     //////////////// Testing dependencies //////////////////

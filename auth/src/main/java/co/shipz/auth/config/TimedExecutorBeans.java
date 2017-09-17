@@ -9,8 +9,8 @@ import java.util.concurrent.Executors;
 
 @Component
 public class TimedExecutorBeans {
-  @Bean(name = "jdbi-async")
-  public Executor timeoutExecutor() {
+  @Bean(name = "jdbiAsyncExecutor")
+  public Executor jdbiTimeoutExecutor() {
     return TimedCompletables
       .timed(
         Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2 + 2),

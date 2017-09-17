@@ -28,4 +28,4 @@ spring:
         connection-timeout: 30000
         minimum-idle: 1
         maximum-pool-size: 6
-        pool-name: shipz_auth
+        pool-name: shipz_auth_read

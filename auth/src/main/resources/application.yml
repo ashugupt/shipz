@@ -14,3 +14,18 @@ spring:
       minimum-idle: 1
       maximum-pool-size: 6
       pool-name: shipz_auth
+
+spring:
+  datasource:
+    read:
+      type: "com.zaxxer.hikari.HikariDataSource"
+      jdbc-url: "jdbc:postgresql://localhost:5432/shipz_auth"
+      driver-class-name: "org.postgresql.Driver"
+      username: "root"
+      password: "P@$$w0rd"
+      hikari:
+        idle-timeout: 10000
+        connection-timeout: 30000
+        minimum-idle: 1
+        maximum-pool-size: 6
+        pool-name: shipz_auth

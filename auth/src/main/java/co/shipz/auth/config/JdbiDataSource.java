@@ -11,9 +11,15 @@ import javax.sql.DataSource;
 @Configuration
 public class JdbiDataSource {
   @Bean
-  @Primary
   @ConfigurationProperties(prefix = "spring.datasource")
-  public DataSource dataSource() throws Exception {
+  public DataSource writeDataSource() throws Exception {
+    return DataSourceBuilder.create().build();
+  }
+
+  @Bean
+  @Primary
+  @ConfigurationProperties(prefix = "spring.datasource.read")
+  public DataSource readDataSource() throws Exception {
     return DataSourceBuilder.create().build();
   }
 }

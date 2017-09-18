@@ -21,7 +21,7 @@ buildscript {
 }
 
 allprojects {
-  group 'co.shipz'
+  group 'com.rivigo.zoom'
 
   apply plugin: 'java'
   apply plugin: 'idea'

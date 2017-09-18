@@ -17,4 +17,13 @@ public class TimedExecutorBeans {
         Duration.ofSeconds(2)
       );
   }
+
+  @Bean(name = "servletAsyncExecutor")
+  public Executor servletTimeoutExecutor() {
+    return TimedCompletables
+      .timed(
+        Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2 + 2),
+        Duration.ofSeconds(2)
+      );
+  }
 }

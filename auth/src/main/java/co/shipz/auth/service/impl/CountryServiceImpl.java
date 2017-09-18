@@ -28,7 +28,15 @@ public class CountryServiceImpl implements CountryService {
       return dao.listAll();
     });
 
-    return CompletableFuture.completedFuture(result);
+        return CompletableFuture.completedFuture(result);
+
+//    CompletableFuture<List<Country>> result = CompletableFuture
+//      .supplyAsync(() -> dbReader.withHandle(handle -> {
+//        CountryDao dao = handle.attach(CountryDao.class);
+//        return dao.listAll();
+//      }));
+//
+//    return result;
   }
 
   @Override

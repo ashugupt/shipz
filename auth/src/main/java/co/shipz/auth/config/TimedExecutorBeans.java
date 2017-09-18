@@ -13,7 +13,10 @@ public class TimedExecutorBeans {
   public Executor jdbiTimeoutExecutor() {
     return TimedCompletables
       .timed(
-        Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2 + 2),
+        Executors.newFixedThreadPool(
+          Runtime.getRuntime().availableProcessors() * 2 + 2,
+          new ThreadFactoryWithNamePrefix("jdbi")
+        ),
         Duration.ofSeconds(2)
       );
   }
@@ -22,7 +25,10 @@ public class TimedExecutorBeans {
   public Executor servletTimeoutExecutor() {
     return TimedCompletables
       .timed(
-        Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2 + 2),
+        Executors.newFixedThreadPool(
+          Runtime.getRuntime().availableProcessors() * 2 + 2,
+          new ThreadFactoryWithNamePrefix("servlet")
+        ),
         Duration.ofSeconds(2)
       );
   }

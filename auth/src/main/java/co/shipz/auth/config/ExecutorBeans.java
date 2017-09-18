@@ -10,6 +10,9 @@ import java.util.concurrent.Executors;
 public class ExecutorBeans {
   @Bean(name = "kafkaExecutor")
   public Executor kafkaExecutor() {
-    return Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
+    return Executors.newFixedThreadPool(
+      Runtime.getRuntime().availableProcessors() * 2,
+      new ThreadFactoryWithNamePrefix("kafka")
+    );
   }
 }

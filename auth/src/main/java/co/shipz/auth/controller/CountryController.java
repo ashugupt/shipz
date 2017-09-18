@@ -2,6 +2,8 @@ package co.shipz.auth.controller;
 
 import co.shipz.auth.model.Country;
 import co.shipz.auth.service.CountryService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -17,6 +19,7 @@ import java.util.concurrent.Future;
 @RestController
 @EnableAsync
 public class CountryController {
+  private static final Logger log = LoggerFactory.getLogger(CountryController.class);
   private final CountryService countryService;
 
   @Autowired
@@ -36,8 +39,13 @@ public class CountryController {
   @Async("servletAsyncExecutor")
   @RequestMapping(value = "/countryAsync", method = RequestMethod.GET)
   public Future<List<Country>> listAllCountriesAsync() throws InterruptedException, ExecutionException {
-    CompletableFuture<List<Country>> countries = countryService
-      .listAllCountries();
+    log.info("Fetching the countries list from database asynchronously");
+    CompletableFuture<List<Country>> countries = new CompletableFuture<>();
+    try {
+      countries = countryService.listAllCountries();
+    } catch (Exception e) {
+      countries.completeExceptionally(e);
+    }
 
     return countries;
   }

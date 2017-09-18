@@ -4,6 +4,8 @@ import co.shipz.auth.dao.CountryDao;
 import co.shipz.auth.model.Country;
 import co.shipz.auth.service.CountryService;
 import org.jdbi.v3.core.Jdbi;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -16,6 +18,7 @@ import java.util.concurrent.CompletableFuture;
 @EnableAsync
 public class CountryServiceImpl implements CountryService {
   private final Jdbi dbReader;
+  private static final Logger log = LoggerFactory.getLogger(CountryService.class);
 
   @Autowired
   public CountryServiceImpl(final Jdbi dbReader) {
@@ -25,12 +28,13 @@ public class CountryServiceImpl implements CountryService {
   @Override
   @Async("jdbiAsyncExecutor")
   public CompletableFuture<List<Country>> listAllCountries() {
+    log.info("Querying the database asynchronously to get country list.");
     List<Country> result = dbReader.withHandle(handle -> {
       CountryDao dao = handle.attach(CountryDao.class);
       return dao.listAll();
     });
 
-        return CompletableFuture.completedFuture(result);
+    return CompletableFuture.completedFuture(result);
 
 //    CompletableFuture<List<Country>> result = CompletableFuture
 //      .supplyAsync(() -> dbReader.withHandle(handle -> {

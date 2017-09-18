@@ -17,7 +17,10 @@ public class SpringAsyncConfig implements AsyncConfigurer {
 
   @Override
   public Executor getAsyncExecutor() {
-    return CompletableExecutors.completable(Executors.newFixedThreadPool(10));
+    return CompletableExecutors
+      .completable(
+        Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2)
+      );
   }
 
   @Override

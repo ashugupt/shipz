@@ -6,12 +6,14 @@ import co.shipz.auth.service.CountryService;
 import org.jdbi.v3.core.Jdbi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Service
+@EnableAsync
 public class CountryServiceImpl implements CountryService {
   private final Jdbi dbReader;
 

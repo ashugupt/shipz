@@ -4,13 +4,13 @@ import co.shipz.auth.model.Country;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
 
 public interface CountryService {
-  CompletableFuture<List<Country>> listAllCountries();
   List<Country> listAllCountriesSync();
 
-  CompletionStage<String> getCountryCodeByName(String countryName);
+  CompletableFuture<List<Country>> listAllCountries();
 
-  CompletionStage<String> getCountryPhoneCodeByName(String countryName);
+  CompletableFuture<String> getCountryCodeByName(String countryName);
+
+  CompletableFuture<String> getCountryPhoneCodeByName(String countryName);
 }

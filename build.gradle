@@ -94,6 +94,7 @@ subprojects {
     springBootWeb
     springBootJdbc
     springBootSecurity
+    springBootActuator
 
     jdbi
     jdbiSqlObject
@@ -126,6 +127,7 @@ subprojects {
     fjQuickcheck "org.functionaljava:functionaljava-quickcheck:$fjV"
 
     springBootWeb "org.springframework.boot:spring-boot-starter-web:$springBootV"
+    springBootActuator "org.springframework.boot:spring-boot-starter-actuator:$springBootV"
     springBootSecurity "org.springframework.boot:spring-boot-starter-security:$springBootV"
     springBootJdbc("org.springframework.boot:spring-boot-starter-jdbc:$springBootV") {
       exclude group: "org.apache.tomcat", module: "tomcat-jdbc"

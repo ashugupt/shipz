@@ -16,7 +16,7 @@ public class ThreadFactoryWithNamePrefix implements ThreadFactory {
       : Thread.currentThread().getThreadGroup();
     namePrefix = prefix + "-"
       + poolNumber.getAndIncrement()
-      + "-thread-";
+      + "-th-";
   }
 
   @Override
